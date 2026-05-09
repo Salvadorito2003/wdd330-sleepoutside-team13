@@ -28,3 +28,11 @@ export function setClick(selector, callback) {
   });
   qs(selector).addEventListener("click", callback);
 }
+
+export function addItemToArray(product) {
+  const itemsArray = getLocalStorage("so-cart") || [];
+  
+  itemsArray.push(product);
+  setLocalStorage("so-cart", itemsArray);
+}
+
