@@ -33,6 +33,6 @@ export function addItemToArray(product) {
   const itemsArray = getLocalStorage("so-cart") || [];
   
   itemsArray.push(product);
-  setLocalStorage("so-cart", itemsArray);
+  setLocalStorage("so-cart", product);
 }
 
