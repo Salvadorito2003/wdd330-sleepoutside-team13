@@ -10,6 +10,9 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  "settings": {
+    "import/core-modules": ["vite"]
+  },
   "rules": {
     "no-unused-vars": [
       1,
