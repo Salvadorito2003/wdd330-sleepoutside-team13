@@ -11,14 +11,7 @@ export function getLocalStorage(key) {
 }
 // save data to local storage and updated to work with arrays of data instead of just one item
 export function setLocalStorage(key, data) {
-  let existing = JSON.parse(localStorage.getItem(key));
-  
-  if (!Array.isArray(existing)) {
-    existing = [];
-  }
-  
-  existing.push(data);
-  localStorage.setItem(key, JSON.stringify(existing));
+  localStorage.setItem(key, JSON.stringify(data));
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
@@ -29,11 +22,12 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
-export function addItemToArray(product) {
-  const itemsArray = getLocalStorage("so-cart") || [];
-  
+export function addItemToArray(key, product) {
+  const itemsArray = getLocalStorage(key) || [];
+
   itemsArray.push(product);
-  setLocalStorage("so-cart", product);
+
+  setLocalStorage(key, itemsArray);
 }
 
 export function getParam(param) {
@@ -43,3 +37,10 @@ export function getParam(param) {
   return product;
 }
 
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+  const htmlStrings = list.map(templateFn);
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
