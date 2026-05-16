@@ -21,4 +21,3 @@ const productList = new ProductList("tents", dataSource, listElement);
 // Initialize the product list by calling init()
 // This starts the process to fetch data and render product cards
 productList.init();
-

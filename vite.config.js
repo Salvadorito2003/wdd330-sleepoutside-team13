@@ -16,4 +16,3 @@ export default defineConfig({
     },
   },
 });
-console.log("=== main.js is running ===");
