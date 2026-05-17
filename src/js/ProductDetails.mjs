@@ -27,8 +27,12 @@ export default class ProductDetails {
 
 renderProductDetails() {
     const productElement = document.querySelector(".product-detail");
-
-    productElement.innerHTML = `
+    var discounted = "";
+    if (this.product.SuggestedRetailPrice > this.product.FinalPrice) {
+      discounted = '<span class="discount">Discounted!</span>';
+    }
+      
+      productElement.innerHTML = `
       <img
         class="divider"
         src="${this.product.Image}"
@@ -41,6 +45,7 @@ renderProductDetails() {
         <p class="product-card__price">
           <span class="list-price">List Price: $${this.product.ListPrice}</span>
           <span class="final-price">Final Price: $${this.product.FinalPrice}</span>
+          ${discounted}
         </p>
         <p class="product__color">${this.product.Colors[0].ColorName}</p>
         <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
