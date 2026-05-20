@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "880RR",
+    "Name": "Marmot Limelight Tent - 3-Person, 3-Season",
+    "NameWithoutBrand": "Limelight Tent - 3-Person, 3-Season",
+    "Image": "../images/marmot-limelight-3p.jpg",
+    "Price": 329.99,
+    "DescriptionHtml": "<p>Reliable shelter...</p>"
+  },
+  {
+    "Id": "985RF",
+    "Name": "REI Co-op Half Dome SL 2+ Tent",
+    "NameWithoutBrand": "Half Dome SL 2+ Tent",
+    "Image": "../images/rei-half-dome-2p.jpg",
+    "Price": 329.00,
+    "DescriptionHtml": "<p>A classic reborn...</p>"
+  }
+]

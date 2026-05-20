@@ -20,4 +20,16 @@ export function setClick(selector, callback) {
     callback();
   });
   qs(selector).addEventListener("click", callback);
+
+  export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+  
+  // Map the array of data into an array of HTML strings using the template function
+  const htmlStrings = list.map(templateFn);
+  
+  // Join the strings together and insert them into the DOM
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
 }
