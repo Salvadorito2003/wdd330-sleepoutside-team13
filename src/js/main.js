@@ -1,3 +1,6 @@
+import { loadHeaderFooter } from "./utils.mjs";
+loadHeaderFooter();
+
 // Import the ProductData class to handle fetching product data from JSON files
 import ProductData from "./ProductData.mjs";
 
