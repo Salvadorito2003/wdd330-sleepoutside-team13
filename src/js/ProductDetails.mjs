@@ -37,8 +37,7 @@ renderProductDetails() {
     if (this.product.SuggestedRetailPrice > this.product.FinalPrice) {
       discounted = '<span class="discount">Discounted!</span>';
     }
-      
-      productElement.innerHTML = `
+    productElement.innerHTML = `
       <img
         class="divider"
         src="${this.product.Images.PrimaryExtraLarge}"

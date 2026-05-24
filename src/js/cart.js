@@ -3,14 +3,8 @@ import { loadHeaderFooter } from "./utils.mjs";
 
 loadHeaderFooter();
 
-function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
-  if (cartItems) {
-    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-    document.querySelector(".product-list").innerHTML = htmlItems.join("");
-  }
-  
-}
+// Load header and footer
+loadHeaderFooter();
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
