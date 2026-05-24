@@ -257,6 +257,18 @@ button {
   }
 }
 
+.category-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.category-grid a {
+  max-width: 150px;
+}
+
 footer {
   font-size: var(--small-font);
   padding: 1em;

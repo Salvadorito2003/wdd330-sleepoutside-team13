@@ -1,15 +1,16 @@
 import { addItemToArray } from "./utils.mjs";
 
 export default class ProductDetails {
-  constructor(productId, dataSource) {
+  constructor(productId, category, dataSource) {
     this.productId = productId;
+    this.category = category;
     this.dataSource = dataSource;
     this.product = {};
   }
 
   async init() {
     // use the datasource to get the details for the current product
-    this.product = await this.dataSource.findProductById(this.productId);
+    this.product = await this.dataSource.findProductById(this.productId, this.category);
     
     // the product details are needed before rendering the HTML
     this.renderProductDetails();
@@ -21,8 +22,13 @@ export default class ProductDetails {
   }
 
   addProductToCart() {
-    addItemToArray("so-cart", this.product);
+  if (!this.product || !this.product.Images) {
+    console.error("Invalid product, not adding to cart:", this.product);
+    return;
   }
+
+  addItemToArray("so-cart", this.product);
+}
   
 
 renderProductDetails() {
@@ -35,7 +41,7 @@ renderProductDetails() {
       productElement.innerHTML = `
       <img
         class="divider"
-        src="${this.product.Image}"
+        src="${this.product.Images.PrimaryExtraLarge}"
         alt="${this.product.Name}"
       />
 
