@@ -31,7 +31,8 @@ export function addItemToArray(key, product) {
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  return urlParams.get(param);   // ← Fixed!
+
+  return urlParams.get(param);
 }
 
 // For lists (products)
@@ -43,30 +44,25 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
 
-// For single templates (header/footer)
 export function renderWithTemplate(template, parentElement, data, callback) {
   parentElement.innerHTML = template;
-  if (callback) {
+  if(callback) {
     callback(data);
   }
 }
 
-// Fetch HTML file as string with ajax and return it as a promise
-export async function loadTemplate(path) {
+export async function loadTemplate(path) { 
   const response = await fetch(path);
   const template = await response.text();
-  return template;
+  return template
 }
 
-// Load header and footer into page
 export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate("/partials/header.html");
+  const headerTemplate = await loadTemplate("../partials/header.html");
+  const footerTemplate = await loadTemplate("../partials/footer.html");
   const headerElement = document.querySelector("#main-header");
-  renderWithTemplate(headerTemplate, headerElement);
-  
-  const footerTemplate = await loadTemplate("/partials/footer.html");
   const footerElement = document.querySelector("#main-footer");
+
+  renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
 }
-
-

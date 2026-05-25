@@ -1,14 +1,20 @@
-import { loadHeaderFooter, getParam } from "./utils.mjs";
 // Import the ProductData class to handle fetching product data from JSON files
 import ProductData from "./ProductData.mjs";
 
 // Import the ProductList class to handle rendering product cards to the page
 import ProductList from "./ProductList.mjs";
 
+import { loadHeaderFooter, getParam } from './utils.mjs';
+
 loadHeaderFooter();
 
+const category = getParam('category');
+const title = document.querySelector("#category-title");
 
-const category = getParam("category");
+title.textContent = `Top Products: ${
+  category.charAt(0).toUpperCase() + category.slice(1)
+}`;
+
 // Create a new instance of ProductData for the "tents" category
 // This will fetch from /json/tents.json
 const dataSource = new ProductData();
