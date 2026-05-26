@@ -1,10 +1,6 @@
 import { getLocalStorage } from "./utils.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 
-await loadHeaderFooter();
-
-// Load header and footer
-loadHeaderFooter();
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -48,6 +44,12 @@ export function displayCartQuantity () {
 }
 
 
-renderCartContents();
-displayCartQuantity();
+async function init() {
+  await loadHeaderFooter();
+
+  renderCartContents();
+  displayCartQuantity();
+}
+
+init();
 
