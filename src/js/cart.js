@@ -33,7 +33,6 @@ function cartItemTemplate(item) {
 
 export function displayCartQuantity () {
   const cartItems = getLocalStorage("so-cart");
-  console.log(cartItems);
   if (cartItems) {
     const cartQuantity = cartItems.length;
     const number = document.querySelector(".cart-items-count");
