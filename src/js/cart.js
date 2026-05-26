@@ -1,7 +1,7 @@
 import { getLocalStorage } from "./utils.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 
-loadHeaderFooter();
+await loadHeaderFooter();
 
 // Load header and footer
 loadHeaderFooter();
@@ -25,4 +25,24 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
+export function displayCartQuantity () {
+  const cartItems = getLocalStorage("so-cart");
+  console.log(cartItems);
+  if (cartItems) {
+    const cartQuantity = cartItems.length;
+    const number = document.querySelector(".cart-items-count");
+    if (number) {
+      number.textContent = cartQuantity;
+      number.style.display = "block";
+      number.style.color = "white";
+      number.style.backgroundColor = "red";
+      number.style.fontSize = "15px";
+      number.style.borderRadius = "50%";
+    }
+  }
+}
+
+
 renderCartContents();
+displayCartQuantity();
+
