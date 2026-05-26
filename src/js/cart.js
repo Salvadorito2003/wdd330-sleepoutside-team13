@@ -1,10 +1,12 @@
 import { getLocalStorage } from "./utils.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 
-await loadHeaderFooter();
 
-// Load header and footer
-loadHeaderFooter();
+function renderCartContents() {
+  const cartItems = getLocalStorage("so-cart");
+  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+}
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
@@ -27,7 +29,6 @@ function cartItemTemplate(item) {
 
 export function displayCartQuantity () {
   const cartItems = getLocalStorage("so-cart");
-  console.log(cartItems);
   if (cartItems) {
     const cartQuantity = cartItems.length;
     const number = document.querySelector(".cart-items-count");
@@ -43,6 +44,12 @@ export function displayCartQuantity () {
 }
 
 
-renderCartContents();
-displayCartQuantity();
+async function init() {
+  await loadHeaderFooter();
+
+  renderCartContents();
+  displayCartQuantity();
+}
+
+init();
 

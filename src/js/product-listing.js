@@ -4,11 +4,11 @@ import ProductData from "./ProductData.mjs";
 // Import the ProductList class to handle rendering product cards to the page
 import ProductList from "./ProductList.mjs";
 
-import { loadHeaderFooter, getParam } from './utils.mjs';
+import { loadHeaderFooter, getParam } from "./utils.mjs";
 
 loadHeaderFooter();
 
-const category = getParam('category');
+const category = getParam("category");
 const title = document.querySelector("#category-title");
 
 title.textContent = `Top Products: ${
