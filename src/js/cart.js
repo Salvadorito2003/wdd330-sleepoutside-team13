@@ -59,12 +59,13 @@ init();
 function checkCart (areItems) {
   const cartItems = getLocalStorage("so-cart");
   const cartFooter = document.querySelector(".cart-footer");
+  const cartTotal = document.querySelector(".cart-total");
   if (areItems == true) {
     cartFooter.style.display = "block";
   }
   let total = 0;
   cartItems.map((item) => { 
     total += item.FinalPrice})
-    cartFooter.innerHTML = `Total: ${total.toFixed(2)}$`;
+    cartTotal.innerHTML = `Total: ${total.toFixed(2)}$`;
 }
 

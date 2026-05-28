@@ -21,6 +21,46 @@
       <section class="products">
         <h2>Review & Place your Order</h2>
       </section>
+      <form action="/submit" method="post">
+        
+        <fieldset>
+          <legend>Personal Information</legend>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required/>
+          <label for="last-name">Last Name:</label>
+          <input type="text" id="last-name" name="last-name" required/>
+        </fieldset>
+
+        <fieldset>
+          <legend>Shipping Information</legend>
+          <label for="address">Street Address:</label>
+          <input type="text" id="address" name="address" required/>
+
+          <label for="city">City:</label>
+          <input type="text" id="city" name="city" required/>
+
+          <label for="state">State:</label>
+          <input type="text" id="state" name="state" required/>
+
+          <label for="zip-code">Zip Code:</label>
+          <input type="text" id="zip-code" name="zip-code" required/>
+        </fieldset>
+
+        <fieldset>
+          <legend>Payment Information</legend>
+          <label for ="credit-card-number">Credit Card Number</label>
+          <input type ="text" id="credit-card-number" name="credit-card-number" required/>
+
+          <label for ="expiration-date">Expiration Date:</label>
+          <input type ="month" id="expiration-date" name="expiration-date" required/>
+
+          <label for ="security-code">Security Code:</label>
+          <input type ="text" id="security-code" name="security-code" required/>
+        </fieldset>
+
+        <button type="submit">Buy my Items</button>
+
+      </form>
     </main>
 
     <footer id="main-footer">
