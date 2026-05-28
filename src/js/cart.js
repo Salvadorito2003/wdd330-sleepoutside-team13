@@ -1,6 +1,6 @@
 import { getLocalStorage } from "./utils.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
-
+const areItems = false;
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -32,6 +32,7 @@ export function displayCartQuantity () {
   if (cartItems) {
     const cartQuantity = cartItems.length;
     const number = document.querySelector(".cart-items-count");
+    
     if (number) {
       number.textContent = cartQuantity;
       number.style.display = "block";
@@ -40,6 +41,7 @@ export function displayCartQuantity () {
       number.style.fontSize = "15px";
       number.style.borderRadius = "50%";
     }
+    return true;
   }
 }
 
@@ -48,8 +50,21 @@ async function init() {
   await loadHeaderFooter();
 
   renderCartContents();
-  displayCartQuantity();
+  const areItems = displayCartQuantity();
+  checkCart(areItems);
 }
 
 init();
+
+function checkCart (areItems) {
+  const cartItems = getLocalStorage("so-cart");
+  const cartFooter = document.querySelector(".cart-footer");
+  if (areItems == true) {
+    cartFooter.style.display = "block";
+  }
+  let total = 0;
+  cartItems.map((item) => { 
+    total += item.FinalPrice})
+    cartFooter.innerHTML = `Total: ${total.toFixed(2)}$`;
+}
 
