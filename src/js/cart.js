@@ -51,7 +51,7 @@ function setupCartEvents() {
 
     let cartItems = getLocalStorage("so-cart") || [];
 
-    // AUMENTAR
+    // INCREASE
     if (event.target.classList.contains("increase")) {
 
       cartItems = cartItems.map((item) => {
@@ -64,7 +64,7 @@ function setupCartEvents() {
       });
     }
 
-    // DISMINUIR
+    // DECREASE
     if (event.target.classList.contains("decrease")) {
 
       cartItems = cartItems.map((item) => {
@@ -77,7 +77,7 @@ function setupCartEvents() {
       });
     }
 
-    // ELIMINAR
+    // DELETE
     if (event.target.classList.contains("cart-card__delete")) {
 
       cartItems = cartItems.filter(
