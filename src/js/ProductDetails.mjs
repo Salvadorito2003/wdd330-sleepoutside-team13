@@ -1,15 +1,16 @@
 import { addItemToArray } from "./utils.mjs";
 
 export default class ProductDetails {
-  constructor(productId, dataSource) {
+  constructor(productId, category, dataSource) {
     this.productId = productId;
+    this.category = category;
     this.dataSource = dataSource;
     this.product = {};
   }
 
   async init() {
     // use the datasource to get the details for the current product
-    this.product = await this.dataSource.findProductById(this.productId);
+    this.product = await this.dataSource.findProductById(this.productId, this.category);
     
     // the product details are needed before rendering the HTML
     this.renderProductDetails();
@@ -21,33 +22,41 @@ export default class ProductDetails {
   }
 
   addProductToCart() {
+  if (!this.product || !this.product.Images) {
+    console.error("Invalid product, not adding to cart:", this.product);
+    return;
+  }
     addItemToArray("so-cart", this.product);
   }
-
-  renderProductDetails() {
-    productDetailsTemplate(this.product);
-  }
 }
-
-function productDetailsTemplate(product) {
-  document.querySelector("h2").textContent = product.Category.charAt(0).toUpperCase() + product.Category.slice(1);
-  document
-
-  document.querySelector("#brand").textContent = product.Brand.Name;
-  document.querySelector("#name").textContent = product.NameWithoutBrand;
-
-  const image = document.querySelector("#productImage");
-
-  image.src = product.Images.PrimaryLarge;
-  image.alt = product.NameWithoutBrand
-
-
-  document.querySelector("#product-card_price").textContent = `$${product.FinalPrice.toFixed(2)}`;
-
-  document.querySelector("#product_color").textContent = product.Colors[0].ColorName;
-
-  document.querySelector("#product_description").innerHTML = product.DescriptionHtmlSimple;
-
-  document.querySelector("#addToCart").dataset.id = product.Id;
   
+
+renderProductDetails() {
+    const productElement = document.querySelector(".product-detail");
+    var discounted = "";
+    if (this.product.SuggestedRetailPrice > this.product.FinalPrice) {
+      discounted = '<span class="discount">Discounted!</span>';
+    }
+    productElement.innerHTML = `
+      <img
+        class="divider"
+        src="${this.product.Images.PrimaryExtraLarge}"
+        alt="${this.product.Name}"
+      />
+
+      <section class="product-card">
+        <h2 class="brand">${this.product.Brand.Name}</h2>
+        <h1 class="product-title">${this.product.NameWithoutBrand}</h1>
+        <p class="product-card__price">
+          <span class="list-price">List Price: $${this.product.ListPrice}</span>
+          <span class="final-price">Final Price: $${this.product.FinalPrice}</span>
+          ${discounted}
+        </p>
+        <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
+        <div class="product-detail__add">
+          <button id="addToCart" data-id="${this.product.Id}">Add to Cart</button>
+        </div>
+      </section>
+    `;
+  }
 }

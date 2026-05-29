@@ -1,5 +1,4 @@
-// Import the ProductData class to handle fetching product data from JSON files
-import ProductData from "./ProductData.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
 
 // Import the ProductList class to handle rendering product cards to the page
 import ProductList from "./ProductList.mjs";

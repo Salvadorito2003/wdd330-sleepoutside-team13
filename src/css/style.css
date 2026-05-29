@@ -344,7 +344,66 @@ button {
   }
 }
 
+.category-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.category-grid a {
+  max-width: 150px;
+}
+
 footer {
   font-size: var(--small-font);
   padding: 1em;
+}
+
+.categories {
+  text-align: center;
+  padding: 2rem;
+}
+
+.categories h2 {
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  margin-bottom: 1.5rem;
+}
+
+.category-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: nowrap; 
+}
+
+.category-grid a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 0; 
+  min-width: 0; 
+  transition: transform 0.2s ease;
+}
+
+.category-grid a:hover {
+  transform: scale(1.05);
+}
+
+.category-grid img {
+  width: clamp(50px, 8vw, 100px);
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+.category-grid h3 {
+  font-size: clamp(0.8rem, 1.5vw, 1.2rem); 
+  margin: 0;
+}
+
+.cart-footer {
+  display: none;
 }

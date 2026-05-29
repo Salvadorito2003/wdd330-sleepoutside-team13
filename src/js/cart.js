@@ -1,6 +1,5 @@
 import { getLocalStorage, setLocalStorage, loadHeaderFooter } from "./utils.mjs";
 
-loadHeaderFooter();
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -91,6 +90,45 @@ function setupCartEvents() {
   });
 }
 
-renderCartContents();
-setupCartEvents();
+export function displayCartQuantity () {
+  const cartItems = getLocalStorage("so-cart");
+  if (cartItems) {
+    const cartQuantity = cartItems.length;
+    const number = document.querySelector(".cart-items-count");
+    
+    if (number) {
+      number.textContent = cartQuantity;
+      number.style.display = "block";
+      number.style.color = "white";
+      number.style.backgroundColor = "red";
+      number.style.fontSize = "15px";
+      number.style.borderRadius = "50%";
+    }
+    return true;
+  }
+}
+
+
+async function init() {
+  await loadHeaderFooter();
+
+  renderCartContents();
+  setupCartEvents();
+  const areItems = displayCartQuantity();
+  checkCart(areItems);
+}
+
+init();
+
+function checkCart (areItems) {
+  const cartItems = getLocalStorage("so-cart");
+  const cartFooter = document.querySelector(".cart-footer");
+  if (areItems == true) {
+    cartFooter.style.display = "block";
+  }
+  let total = 0;
+  cartItems.map((item) => { 
+    total += item.FinalPrice})
+    cartFooter.innerHTML = `Total: ${total.toFixed(2)}$`;
+}
 
