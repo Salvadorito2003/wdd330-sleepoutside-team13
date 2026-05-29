@@ -23,36 +23,35 @@ export default class ProductDetails {
   addProductToCart() {
     addItemToArray("so-cart", this.product);
   }
-  
 
-renderProductDetails() {
-    const productElement = document.querySelector(".product-detail");
-    var discounted = "";
-    if (this.product.SuggestedRetailPrice > this.product.FinalPrice) {
-      discounted = '<span class="discount">Discounted!</span>';
-    }
-      
-      productElement.innerHTML = `
-      <img
-        class="divider"
-        src="${this.product.Image}"
-        alt="${this.product.Name}"
-      />
-
-      <section class="product-card">
-        <h2 class="brand">${this.product.Brand.Name}</h2>
-        <h1 class="product-title">${this.product.NameWithoutBrand}</h1>
-        <p class="product-card__price">
-          <span class="list-price">List Price: $${this.product.ListPrice}</span>
-          <span class="final-price">Final Price: $${this.product.FinalPrice}</span>
-          ${discounted}
-        </p>
-        <p class="product__color">${this.product.Colors[0].ColorName}</p>
-        <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
-        <div class="product-detail__add">
-          <button id="addToCart" data-id="${this.product.Id}">Add to Cart</button>
-        </div>
-      </section>
-    `;
+  renderProductDetails() {
+    productDetailsTemplate(this.product);
   }
+}
+
+function productDetailsTemplate(product) {
+  document.querySelector("h2").textContent = product.Category.charAt(0).toUpperCase() + product.Category.slice(1);
+  document
+
+  document.querySelector("#brand").textContent = product.Brand.Name;
+  document.querySelector("#name").textContent = product.NameWithoutBrand;
+
+  const image = document.querySelector("#productImage");
+
+  image.src = product.Images.PrimaryLarge;
+  image.alt = product.NameWithoutBrand
+
+  const euroPrice = new Intl.NumberFormat('de-DE',
+    {
+      style: 'currency', currency: 'EUR',
+    }).format(Number(product.FinalPrice) * 0.85);
+
+  document.querySelector("#product-card_price").textContent = `${euroPrice}`;
+
+  document.querySelector("#product_color").textContent = product.Colors[0].ColorName;
+
+  document.querySelector("#product_description").innerHTML = product.DescriptionHtmlSimple;
+
+  document.querySelector("#addToCart").dataset.id = product.Id;
+  
 }

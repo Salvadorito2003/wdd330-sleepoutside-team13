@@ -33,7 +33,7 @@ export function addItemToArray(key, product) {
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const product = urlParams.get('product')
+  const product = urlParams.get(param)
   return product;
 }
 
@@ -59,8 +59,8 @@ export async function loadTemplate(path) {
 };
 
 export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate("../partials/header.html");
-  const footerTemplate = await loadTemplate("../partials/footer.html");
+  const headerTemplate = await loadTemplate("/partials/header.html");
+  const footerTemplate = await loadTemplate("/partials/footer.html");
 
   const headerTag = document.querySelector("#main-header");
   const footerTag = document.querySelector("#main-footer");
