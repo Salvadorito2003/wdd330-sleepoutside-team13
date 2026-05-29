@@ -87,6 +87,8 @@ function setupCartEvents() {
     setLocalStorage("so-cart", cartItems);
 
     renderCartContents();
+    const areItems = displayCartQuantity();
+    checkCart(areItems);
   });
 }
 
@@ -128,7 +130,8 @@ function checkCart (areItems) {
   }
   let total = 0;
   cartItems.map((item) => { 
-    total += item.FinalPrice})
-    cartFooter.innerHTML = `Total: ${total.toFixed(2)}$`;
+    total += item.FinalPrice * item.Quantity;
+  });
+  cartFooter.innerHTML = `Total: ${total.toFixed(2)}$`;
 }
 

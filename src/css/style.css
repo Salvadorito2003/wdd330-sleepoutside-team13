@@ -116,6 +116,16 @@ button {
 
 /* End utility classes */
 
+/* Product page styles */
+.product-card-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  padding-bottom: 2rem;
+}
+
 
 /* =========================
    Categories Section
@@ -188,6 +198,25 @@ button {
 
 .cart:hover svg {
   fill: gray;
+}
+
+/* El contenedor 'a' debe ser el punto de referencia */
+.cart a {
+  position: relative;
+  display: inline-block;
+}
+
+/* Estilos de posicionamiento para el contador */
+.cart-items-count {
+  position: absolute;
+  top: -8px;       /* Lo empuja hacia arriba del carrito */
+  right: -8px;     /* Lo empuja hacia la derecha del carrito */
+  
+  /* Asegura un círculo perfecto si el número crece */
+  min-width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
 }
 
 /* End cart icon styles */
