@@ -3,11 +3,15 @@ import ProductList from "./ProductList.mjs";
 
 import ProductData from "./ProductData.mjs";
 
+import { displayCartQuantity } from "./cart.js";
+
 //Import the funtion to render the Header and Footer
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, getLocalStorage } from "./utils.mjs";
 
-loadHeaderFooter();
-
+async function init() {
+    await loadHeaderFooter();
+    displayCartQuantity();
+}
 // Create a new instance of ProductData for the "tents" category
 // This will fetch from /json/tents.json
 const dataSource = new ProductData();
@@ -25,4 +29,7 @@ const productList = new ProductList("tents", dataSource, listElement);
 // Initialize the product list by calling init()
 // This starts the process to fetch data and render product cards
 productList.init();
+init();
+
+
 
