@@ -26,8 +26,8 @@ export default class ProductDetails {
     console.error("Invalid product, not adding to cart:", this.product);
     return;
   }
-
-  addItemToArray("so-cart", this.product);
+    addItemToArray("so-cart", this.product);
+  }
 }
   
 
@@ -52,7 +52,6 @@ renderProductDetails() {
           <span class="final-price">Final Price: $${this.product.FinalPrice}</span>
           ${discounted}
         </p>
-        <p class="product__color">${this.product.Colors[0].ColorName}</p>
         <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
         <div class="product-detail__add">
           <button id="addToCart" data-id="${this.product.Id}">Add to Cart</button>
