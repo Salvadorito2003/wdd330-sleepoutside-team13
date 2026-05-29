@@ -25,7 +25,19 @@ export function setClick(selector, callback) {
 export function addItemToArray(key, product) {
   const itemsArray = getLocalStorage(key) || [];
 
-  itemsArray.push(product);
+  const existingProduct = itemsArray.find(
+    (item) => item.Id === product.Id
+  );
+
+  if (existingProduct) {
+    existingProduct.Quantity += 1;
+  } 
+  else {
+    itemsArray.push({
+      ...product,
+      Quantity: 1,
+    });
+  }
 
   setLocalStorage(key, itemsArray);
 }

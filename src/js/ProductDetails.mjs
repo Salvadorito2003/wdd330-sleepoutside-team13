@@ -41,12 +41,8 @@ function productDetailsTemplate(product) {
   image.src = product.Images.PrimaryLarge;
   image.alt = product.NameWithoutBrand
 
-  const euroPrice = new Intl.NumberFormat('de-DE',
-    {
-      style: 'currency', currency: 'EUR',
-    }).format(Number(product.FinalPrice) * 0.85);
 
-  document.querySelector("#product-card_price").textContent = `${euroPrice}`;
+  document.querySelector("#product-card_price").textContent = `$${product.FinalPrice.toFixed(2)}`;
 
   document.querySelector("#product_color").textContent = product.Colors[0].ColorName;
 

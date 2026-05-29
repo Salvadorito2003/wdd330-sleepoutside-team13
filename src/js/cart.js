@@ -8,7 +8,6 @@ function renderCartContents() {
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
   }
-  deleteItem(cartItems)
 }
 
 function cartItemTemplate(item) {
@@ -22,28 +21,76 @@ function cartItemTemplate(item) {
   <a href="/product_pages/?product=${item.Id}">
     <h2 class="card__name">${item.Name}</h2>
   </a>
-  <p class="cart-card__quantity">qty: 1</p>
-  <p class="cart-card__price">$${item.FinalPrice}</p>
+  <div class="cart-card__quantity">
+      <button 
+        class="quantity-btn decrease" 
+        data-id="${item.Id}">
+        -
+      </button>
+      <span>Qty:${item.Quantity}</span>
+      <button 
+        class="quantity-btn increase" 
+        data-id="${item.Id}">
+        +
+      </button>
+    </div>
+  <p class="cart-card__price">$${(item.FinalPrice * item.Quantity).toFixed(2)}</p>
   <button class="cart-card__delete" id="${item.Id}">&times;</button>
 </li>`;
 
   return newItem;
 }
 
-function deleteItem(cartItems) {
+
+
+function setupCartEvents() {
   const parent = document.querySelector(".product-list");
 
   parent.addEventListener("click", (event) => {
-    if (event.target.classList.contains("cart-card__delete")) {
-      const itemId = event.target.id;
+    const itemId = event.target.dataset.id;
 
-      cartItems = cartItems.filter(item => item.Id !== itemId);
+    let cartItems = getLocalStorage("so-cart") || [];
 
-      setLocalStorage("so-cart", cartItems);
+    // AUMENTAR
+    if (event.target.classList.contains("increase")) {
 
-      renderCartContents();
+      cartItems = cartItems.map((item) => {
+
+        if (item.Id === itemId) {
+          item.Quantity += 1;
+        }
+
+        return item;
+      });
     }
-  })
+
+    // DISMINUIR
+    if (event.target.classList.contains("decrease")) {
+
+      cartItems = cartItems.map((item) => {
+
+        if (item.Id === itemId && item.Quantity > 1) {
+          item.Quantity -= 1;
+        }
+
+        return item;
+      });
+    }
+
+    // ELIMINAR
+    if (event.target.classList.contains("cart-card__delete")) {
+
+      cartItems = cartItems.filter(
+        (item) => item.Id !== itemId
+      );
+    }
+
+    setLocalStorage("so-cart", cartItems);
+
+    renderCartContents();
+  });
 }
+
 renderCartContents();
+setupCartEvents();
 
