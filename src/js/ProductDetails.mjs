@@ -1,16 +1,15 @@
 import { addItemToArray } from "./utils.mjs";
 
 export default class ProductDetails {
-  constructor(productId, category, dataSource) {
+  constructor(productId, dataSource) {
     this.productId = productId;
-    this.category = category;
     this.dataSource = dataSource;
     this.product = {};
   }
 
   async init() {
     // use the datasource to get the details for the current product
-    this.product = await this.dataSource.findProductById(this.productId, this.category);
+    this.product = await this.dataSource.findProductById(this.productId);
     
     // the product details are needed before rendering the HTML
     this.renderProductDetails();
@@ -28,7 +27,7 @@ export default class ProductDetails {
   }
     addItemToArray("so-cart", this.product);
   }
-}
+
   
 
 renderProductDetails() {
@@ -44,12 +43,12 @@ renderProductDetails() {
         alt="${this.product.Name}"
       />
 
-      <section class="product-card">
+      <section class="product-card-details">
         <h2 class="brand">${this.product.Brand.Name}</h2>
         <h1 class="product-title">${this.product.NameWithoutBrand}</h1>
         <p class="product-card__price">
-          <span class="list-price">List Price: $${this.product.ListPrice}</span>
-          <span class="final-price">Final Price: $${this.product.FinalPrice}</span>
+          <span class="list-price">List Price: $${this.product.ListPrice}</span><br>
+          <span class="final-price">Final Price: $${this.product.FinalPrice}</span><br>
           ${discounted}
         </p>
         <p class="product__description">${this.product.DescriptionHtmlSimple}</p>

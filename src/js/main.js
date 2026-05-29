@@ -1,7 +1,7 @@
-import { loadHeaderFooter } from "./utils.mjs";
-
 // Import the ProductList class to handle rendering product cards to the page
 import ProductList from "./ProductList.mjs";
+
+import ProductData from "./ProductData.mjs";
 
 //Import the funtion to render the Header and Footer
 import { loadHeaderFooter } from "./utils.mjs";
@@ -10,7 +10,7 @@ loadHeaderFooter();
 
 // Create a new instance of ProductData for the "tents" category
 // This will fetch from /json/tents.json
-const dataSource = new ProductData("tents");
+const dataSource = new ProductData();
 
 // Find the HTML element where product cards will be inserted
 // This is the empty <ul class="product-list"> in index.html
