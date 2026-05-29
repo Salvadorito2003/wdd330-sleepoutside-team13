@@ -320,3 +320,28 @@ footer {
 .cart-footer {
   display: none;
 }
+
+.form-and-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.form {
+  grid-column: 1/3;
+  padding: 15px;
+}
+fieldset {
+  
+  display: flex;
+  flex-direction: column;
+}
+.order-summary {
+  grid-column: 3/4;
+  padding: 15px;
+}
+input:valid {
+  border-color: green;
+}
+input:invalid {
+  border-color: red;
+}
