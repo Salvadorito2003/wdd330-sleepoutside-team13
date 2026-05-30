@@ -24,15 +24,29 @@ export function setClick(selector, callback) {
 // add an item to an array in local storage (for cart)
 export function addItemToArray(key, product) {
   const itemsArray = getLocalStorage(key) || [];
-  itemsArray.push(product);
+
+  const existingProduct = itemsArray.find(
+    (item) => item.Id === product.Id
+  );
+
+  if (existingProduct) {
+    existingProduct.Quantity += 1;
+  } 
+  else {
+    itemsArray.push({
+      ...product,
+      Quantity: 1,
+    });
+  }
+
   setLocalStorage(key, itemsArray);
 }
 
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-
-  return urlParams.get(param);
+  const product = urlParams.get(param)
+  return product;
 }
 
 // For lists (products)
@@ -42,27 +56,28 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   }
   const htmlStrings = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
-}
+};
 
 export function renderWithTemplate(template, parentElement, data, callback) {
   parentElement.innerHTML = template;
-  if(callback) {
+  if (callback) {
     callback(data);
   }
-}
+};
 
-export async function loadTemplate(path) { 
-  const response = await fetch(path);
-  const template = await response.text();
-  return template
-}
+export async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
+  return template;
+};
 
 export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate("../partials/header.html");
-  const footerTemplate = await loadTemplate("../partials/footer.html");
-  const headerElement = document.querySelector("#main-header");
-  const footerElement = document.querySelector("#main-footer");
+  const headerTemplate = await loadTemplate("/partials/header.html");
+  const footerTemplate = await loadTemplate("/partials/footer.html");
 
-  renderWithTemplate(headerTemplate, headerElement);
-  renderWithTemplate(footerTemplate, footerElement);
-}
+  const headerTag = document.querySelector("#main-header");
+  const footerTag = document.querySelector("#main-footer");
+
+  renderWithTemplate(headerTemplate, headerTag);
+  renderWithTemplate(footerTemplate, footerTag);
+};
