@@ -678,3 +678,19 @@ footer {
     transform: translateX(-50%);
   }
 }
+
+/* Cart delete button */
+.cart-card__delete {
+  background: var(--tertiary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.cart-card__delete:hover {
+  background: #6b3410;
+}

@@ -1,44 +1,59 @@
+// Get the API base URL from the Vite environment variables
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
-function convertToJson(res) {
+// Helper function to convert a fetch response into JSON
+// and handle any server errors consistently
+async function convertToJson(res) {
+  const jsonResponse = await res.json();
+
+  // If the request was successful, return the JSON data
   if (res.ok) {
-    return res.json();
+    return jsonResponse;
   } else {
-    throw new Error("Bad Response");
+    // Otherwise throw a custom error object
+    throw { name: "servicesError", message: jsonResponse };
   }
 }
-// load header and footer and insert into page without needing to repeat code in every page
-// this is the use of a template, but instead of using it to create HTML for products, we are using it to load the header and footer into the page
-// this method is called ajax templating, and it is a common use of templates to load repeated elements like headers and footers into pages without needing to repeat code in every page
+
+// Class responsible for communicating with the external API
 export default class ExternalServices {
   constructor() {}
+
+  // Fetch all products in a specific category
+  // Example: tents, backpacks, hammocks
   async getData(category) {
     const response = await fetch(`${baseURL}products/search/${category}`);
     const data = await convertToJson(response);
-    return data.Result;
-}
-  async findProductById(id) {
-    const response = await fetch(`${baseURL}product/${id}`);
-    
-    const data = await convertToJson(response);
 
+    // Return only the Result array from the API response
     return data.Result;
   }
 
+  // Fetch details for a single product using its ID
+  async findProductById(id) {
+    const response = await fetch(`${baseURL}product/${id}`);
+    const data = await convertToJson(response);
+
+    // Return the product object
+    return data.Result;
+  }
+
+  // Send checkout/order information to the server
   async checkout(order) {
-    console.log("Sending to server:", JSON.stringify(order, null, 2));
+    // Configure the POST request
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
+      // Convert the order object into JSON before sending
       body: JSON.stringify(order)
     };
-    
+
+    // Send the order to the checkout endpoint
     const response = await fetch(`${baseURL}checkout`, options);
+
+    // Return the server response
     return await convertToJson(response);
   }
 }
-
-
-

@@ -1,45 +1,48 @@
 import { loadHeaderFooter } from "./utils.mjs";
 import Alert from "./Alert.mjs";
+import ProductList from "./ProductList.mjs";
+import ExternalServices from "./ExternalServices.mjs";
+import { displayCartQuantity } from "./cart.js";
 
 async function init() {
   const alert = new Alert();
-  await alert.init();        
-  await loadHeaderFooter();  
+  await alert.init();
+  await loadHeaderFooter();
+  displayCartQuantity();
+  
+  // Fetch all categories
+  const dataSource = new ExternalServices();
+  const categories = ["tents", "backpacks", "sleeping-bags", "hammocks"];
+  
+  let allProducts = [];
+  for (const category of categories) {
+    const products = await dataSource.getData(category);
+    // Add category to each product for correct links
+    products.forEach(p => p.Category = category);
+    allProducts = allProducts.concat(products);
+  }
+  
+  // Shuffle and take top 8
+  const shuffled = shuffleArray(allProducts).slice(0, 8);
+  
+  // Render using ProductList but with our pre-loaded data
+  const listElement = document.querySelector(".product-list");
+  const productList = new ProductList("mixed", dataSource, listElement);
+  
+  // Override init to use our shuffled list instead of fetching
+  productList.init = async function() {
+    this.renderList(shuffled);
+  };
+  
+  productList.init();
+}
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
 
 init();
-// Import the ProductList class to handle rendering product cards to the page
-import ProductList from "./ProductList.mjs";
-
-import ProductData from "./ProductData.mjs";
-
-import { displayCartQuantity } from "./cart.js";
-
-//Import the funtion to render the Header and Footer
-import { loadHeaderFooter, getLocalStorage } from "./utils.mjs";
-
-async function init() {
-    await loadHeaderFooter();
-    displayCartQuantity();
-}
-// Create a new instance of ProductData for the "tents" category
-// This will fetch from /json/tents.json
-const dataSource = new ProductData();
-
-// Find the HTML element where product cards will be inserted
-// This is the empty <ul class="product-list"> in index.html
-const listElement = document.querySelector(".product-list");
-
-// Create a new instance of ProductList and initialize it with:
-// 1. The category name ("tents")
-// 2. The data source (ProductData instance)
-// 3. The target HTML element to render into
-const productList = new ProductList("tents", dataSource, listElement);
-
-// Initialize the product list by calling init()
-// This starts the process to fetch data and render product cards
-productList.init();
-init();
-
-
-
