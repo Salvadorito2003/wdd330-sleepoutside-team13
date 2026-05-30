@@ -1,0 +1,12 @@
+[
+  {
+    "message": "Summer sale starts now!",
+    "background": "orange",
+    "color": "black"
+  },
+  {
+    "message": "New tents in stock",
+    "background": "forestgreen",
+    "color": "white"
+  }
+]

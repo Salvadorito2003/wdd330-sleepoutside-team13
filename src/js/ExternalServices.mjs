@@ -10,7 +10,7 @@ function convertToJson(res) {
 // load header and footer and insert into page without needing to repeat code in every page
 // this is the use of a template, but instead of using it to create HTML for products, we are using it to load the header and footer into the page
 // this method is called ajax templating, and it is a common use of templates to load repeated elements like headers and footers into pages without needing to repeat code in every page
-export default class ProductData {
+export default class ExternalServices {
   constructor() {}
   async getData(category) {
     const response = await fetch(`${baseURL}products/search/${category}`);
@@ -24,4 +24,21 @@ export default class ProductData {
 
     return data.Result;
   }
+
+  async checkout(order) {
+    console.log("Sending to server:", JSON.stringify(order, null, 2));
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(order)
+    };
+    
+    const response = await fetch(`${baseURL}checkout`, options);
+    return await convertToJson(response);
+  }
 }
+
+
+

@@ -1,5 +1,21 @@
 import { addItemToArray } from "./utils.mjs";
 
+function animateCart() {
+  const cartLink = document.querySelector(".cart");
+  if (!cartLink) return;
+  
+  // Scroll to top so user sees the animation
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  
+  // Wait for scroll, then animate
+  setTimeout(() => {
+    cartLink.classList.add("cart-animate");
+    setTimeout(() => {
+      cartLink.classList.remove("cart-animate");
+    }, 500);
+  }, 300);
+}
+
 export default class ProductDetails {
   constructor(productId, category, dataSource) {
     this.productId = productId;
@@ -28,6 +44,7 @@ export default class ProductDetails {
   }
 
   addItemToArray("so-cart", this.product);
+  animateCart();
 }
   
 
