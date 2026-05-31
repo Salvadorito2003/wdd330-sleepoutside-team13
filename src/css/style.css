@@ -64,6 +64,18 @@ p {
   position: relative;
 }
 
+.hero {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .hero .logo {
   position: absolute;
   left: calc(50% - 60px);
