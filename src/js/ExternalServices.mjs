@@ -1,14 +1,16 @@
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
 async function convertToJson(res) {
-  const data = await res.json();
+  const jsonResponse = await res.json();
 
   if (res.ok) {
-    return data;
+    return jsonResponse;
   }
 
-  console.log("Backend response:", data);
-  throw new Error(JSON.stringify(data));
+  throw {
+    name: "servicesError",
+    message: jsonResponse,
+  };
 }
 // load header and footer and insert into page without needing to repeat code in every page
 // this is the use of a template, but instead of using it to create HTML for products, we are using it to load the header and footer into the page

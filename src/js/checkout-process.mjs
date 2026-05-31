@@ -109,6 +109,9 @@ export default class CheckoutProcess {
       alert("Order submitted successfully!");
     } catch (err) {
       console.log(err);
+      document.querySelector(".errors").innerHTML = Object.values(
+        err.message
+      ).join("<br>");
     }
   }
 }
