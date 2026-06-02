@@ -436,3 +436,62 @@ footer {
 .cart-footer {
   display: none;
 }
+
+/* Checkout page styles */
+#checkout-form{
+  margin-top: 2em;
+  @media screen and (max-width: 500px) {
+  max-width: 400px;
+  margin: auto;
+  padding: 1em;
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;}
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input:invalid:focus {
+  border-color: red;
+}
+
+button {
+  background-color: #0070ba;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #005ea6;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+  }
+}
+
+.row .form-group {
+  flex: 1;
+}
