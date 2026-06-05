@@ -12,8 +12,13 @@ document
   .addEventListener("blur", order.calculateOrderTotal.bind(order));
 
 // listening for click on the button
-document.querySelector("#checkoutSubmit").addEventListener("click", (e) => {
+document.querySelector("#checkoutForm").addEventListener("submit", (e) => {
   e.preventDefault();
-
-  order.checkout();
+  const myForm = e.target
+  const chk_status = myForm.checkValidity();
+  myForm.reportValidity();
+  if(chk_status)
+  {
+    order.checkout();
+  }
 });

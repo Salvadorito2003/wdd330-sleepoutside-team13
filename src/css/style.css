@@ -233,6 +233,15 @@ button {
 .button:hover {
   background-color: #08320e;
 }
+#checkoutSubmit[hidden] {
+  display: none !important;
+}
+.cart-empty-message {
+  font-size: var(--small-font);
+  color: var(--dark-grey);
+  margin: 1rem;
+  text-align: center;
+}
 
 /* End cart icon styles */
 
@@ -544,4 +553,41 @@ button:hover {
   border-top: 2px solid #ddd;
   padding-top: 0.75rem;
   margin-top: 0.25rem;
+}
+
+/* Alert message styles */
+.alert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+
+  background-color: #fff3cd;
+  border: 1px solid #ffe69c;
+  border-radius: 4px;
+
+  color: #664d03;
+}
+
+.close-alert {
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+.close-alert:hover {
+  opacity: 0.7;
+}
+
+
+
+/* End checkout page styles */
+
+/* Success page styles */
+#success-message {
+  text-align: center;
+  height: 100%;
 }

@@ -89,6 +89,7 @@ function setupCartEvents() {
     renderCartContents();
     const areItems = displayCartQuantity();
     checkCart(areItems);
+    displayCheckoutButton();
   });
 }
 
@@ -118,6 +119,7 @@ async function init() {
   setupCartEvents();
   const areItems = displayCartQuantity();
   checkCart(areItems);
+  displayCheckoutButton();
 }
 
 init();
@@ -133,5 +135,15 @@ function checkCart (areItems) {
     total += item.FinalPrice * item.Quantity;
   });
   cartFooter.innerHTML = `Total: ${total.toFixed(2)}$`;
+}
+
+function displayCheckoutButton() {
+ const cart = getLocalStorage("so-cart") || [];
+  const checkoutDiv = document.querySelector("#checkoutSubmit");
+  const emptyMessage = document.querySelector(".cart-empty-message");
+
+  const hasItems = cart.length > 0;
+  checkoutDiv.hidden = !hasItems;
+  emptyMessage.hidden = hasItems;
 }
 
