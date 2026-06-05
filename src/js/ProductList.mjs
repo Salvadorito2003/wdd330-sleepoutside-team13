@@ -16,17 +16,33 @@ export default class ProductList {
     this.category = category;
     this.dataSource = dataSource;
     this.listElement = listElement;
+    this.products = [];
   }
 
   async init() {
-    const list = await this.dataSource.getData(this.category);
-    this.renderList(list);  
-    console.log(list);
+    this.products = await this.dataSource.getData(this.category);
+    this.renderList(this.products);
   }
 
   renderList(list) {
     // Added "true" to clear element before inserting new cards
     renderListWithTemplate(productCardTemplate, this.listElement, list, "afterbegin", true);
+  }
+
+  sortProducts(sortBy = "default") {
+    const sortedProducts = [...this.products];
+
+    if (sortBy === "price") {
+      sortedProducts.sort((firstProduct, secondProduct) => firstProduct.FinalPrice - secondProduct.FinalPrice);
+    }
+
+    if (sortBy === "alpha") {
+      sortedProducts.sort((firstProduct, secondProduct) =>
+        firstProduct.NameWithoutBrand.localeCompare(secondProduct.NameWithoutBrand)
+      );
+    }
+
+    this.renderList(sortedProducts);
   }
 
   
