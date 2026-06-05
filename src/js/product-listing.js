@@ -24,7 +24,14 @@ async function init() {
   const dataSource = new ExternalServices();
   const listElement = document.querySelector(".product-list");
   const myList = new ProductList(category, dataSource, listElement);
-  myList.init();
+  await myList.init();
+
+  const sortSelect = document.querySelector("#sort-products");
+  if (sortSelect) {
+    sortSelect.addEventListener("change", (event) => {
+      myList.sortProducts(event.target.value);
+    });
+  }
 }
 
 init();
